@@ -1,5 +1,7 @@
 <template>
-  <div class="column">
+  <div class="column mdl-card mdl-shadow--2dp">
+    <div class="column-header">{{column.name}}</div>
+
     <div v-for="(thread, $index) in column.threads" :key="thread.id">
       <div class="card-wrapper card-placeholder" v-if="dragTargetColumn === column && dragTargetRank === $index">
         <board-card :thread="draggedThread"></board-card>
@@ -13,7 +15,7 @@
     </div>
 
     <template>
-      <div class="card-placeholder" v-if="dragTargetColumn === column && dragTargetRank === column.threads.length">
+      <div class="card-wrapper card-placeholder " v-if="dragTargetColumn === column && dragTargetRank === column.threads.length">
         <board-card :thread="draggedThread"></board-card>
       </div>
       <div @mousemove="onMouseMoveOverColumn" class="column-fill"></div>
@@ -104,11 +106,19 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    background: #f5f5f5;
-    margin: 0 5px;
-    padding: 5px 5px 0 5px;
     flex-grow: 1;
     width: 0;
+    margin: 10px 5px;
+    background: #fcfcfc;
+  }
+
+  .column-header {
+    background: rgb(96,125,139);
+    padding: 5px;
+    box-sizing: border-box;
+    color: white;
+    text-align: center;
+    margin-bottom: 5px;
   }
 
   .column-fill {
@@ -116,12 +126,12 @@
   }
 
   .card-wrapper {
-    margin-bottom: 5px;
+    margin: 5px 10px;
   }
 
   .card-placeholder {
-    background: #e6e6e6;
-    border-radius: 3px;
+    background: #b7b7b7;
+    border-radius: 2px;
   }
 
   .card-placeholder > * {

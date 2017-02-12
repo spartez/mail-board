@@ -1,15 +1,17 @@
 <template>
-  <div class="thread-message">
+  <div class="mdl-card mdl-shadow--2dp thread-message-card">
+    <div class="mdl-card__supporting-text">
     <span class="icon-default aui-icon aui-icon-small thread-message-collapse"
           :class="{'aui-iconfont-collapsed': isCollapsed, 'aui-iconfont-expanded': !isCollapsed}"
           @click="isCollapsed = !isCollapsed">
     </span>
-    <img class="thread-message-avatar" :src="message.from.avatar">
-    <a :href="'mailto:' + message.from.address">{{ message.from.name }}</a>
-    wrote to
-    <img class="thread-message-avatar" :title="person.name" v-for="person in message.to" :src="person.avatar">
-    ({{ message.internalDate | calendarTime }})
-    <iframe v-show="!isCollapsed" ref="iframe" class="message-iframe"></iframe>
+      <img class="thread-message-avatar" :src="message.from.avatar">
+      <a :href="'mailto:' + message.from.address">{{ message.from.name }}</a>
+      wrote to
+      <img class="thread-message-avatar" :title="person.name" v-for="person in message.to" :src="person.avatar">
+      ({{ message.internalDate | calendarTime }})
+      <iframe v-show="!isCollapsed" ref="iframe" class="message-iframe"></iframe>
+    </div>
   </div>
 </template>
 
@@ -65,15 +67,9 @@
     border: none;
   }
 
-  .thread-message {
-    border-bottom: 1px solid #ccc;
-    padding: 15px 0 10px 15px;
-  }
-
-  .thread-message:hover {
-    background-color: #f5f5f5;
-    border-left: 5px solid #3572b0;
-    padding-left: 10px;
+  .thread-message-card {
+    width: 100%;
+    margin-top: 20px;
   }
 
   .thread-message-avatar {

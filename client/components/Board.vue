@@ -1,17 +1,10 @@
 <template>
   <div class="board">
-    <div class="board-header">
-      <div class="quick-filters">
-        <span class="quick-filters-label">Filters:</span>
-        <a class="quick-filter">Unread</a>
-      </div>
-    </div>
-
     <div class="board-content">
       <div class="columns">
-        <div class="columns-header">
-          <div v-for="column in columns" class="column-header">{{ column.name }}</div>
-        </div>
+        <!--<div class="columns-header">-->
+          <!--<div v-for="column in columns" class="column-header">{{ column.name }}</div>-->
+        <!--</div>-->
 
         <div class="columns-content">
           <board-column v-for="column in columns" :column="column"></board-column>
@@ -44,10 +37,6 @@
   export default {
     components: {BoardColumn, BoardCard, ThreadPreview},
 
-    data: () => ({
-      previewWidth: 400
-    }),
-
     computed: {
       ...mapGetters({
         columns: store.COLUMNS,
@@ -71,40 +60,22 @@
   .board {
     box-sizing: border-box;
     height: 100%;
-    background: white;
-  }
-
-  .board-header {
-    height: 80px;
+    background: #fcfcfc;
   }
 
   .board-content {
     box-sizing: border-box;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #ddd;
     display: flex;
     flex-wrap: nowrap;
-    height: calc(100% - 80px);
-    background: white;
+    height: 100%;
+    padding-top: 40px;
   }
 
   .columns {
     overflow: auto;
     flex-grow: 1;
     height: 100%;
-  }
-
-  .columns-header {
-    display: flex;
-    justify-content: space-between;
-    height: 40px;
-    line-height: 40px;
-    z-index: 1;
-  }
-
-  .column-header {
-    flex-grow: 1;
-    flex-basis: 0;
-    margin: 0 5px;
   }
 
   .columns-content {
@@ -121,6 +92,7 @@
     display: flex;
     height: 100%;
     overflow: auto;
+    background: #f7f7f7;
   }
 
   @media (max-width: 1000px) {
@@ -130,7 +102,6 @@
   }
 
   .preview-content {
-    padding: 10px 10px 10px 0;
     width: 100%;
     box-sizing: border-box;
   }

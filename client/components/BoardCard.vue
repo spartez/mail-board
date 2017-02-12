@@ -1,11 +1,13 @@
 <template>
-  <div class="card" @click="setActiveThread(thread)" :active="isActiveThread">
-    <section class="summary">
-      {{ thread.subject }}
-    </section>
-    <section class="fields">
-      <img class="avatar" v-for="participant in thread.participants" :src="participant.avatar">
-    </section>
+  <div class="mdl-card mdl-shadow--2dp card" @click="setActiveThread(thread)" :active="isActiveThread">
+    <div class="mdl-card__supporting-text">
+      <section class="summary">
+        {{ thread.subject }}
+      </section>
+      <section class="fields">
+        <img class="avatar" v-for="participant in thread.participants" :src="participant.avatar">
+      </section>
+    </div>
   </div>
 </template>
 
@@ -18,16 +20,16 @@
 
     methods: {
       ...mapActions({
-          setActiveThread: store.SET_ACTIVE_THREAD
+        setActiveThread: store.SET_ACTIVE_THREAD
       })
     },
 
     computed: {
       ...mapGetters({
-          activeThread: store.ACTIVE_THREAD
+        activeThread: store.ACTIVE_THREAD
       }),
       isActiveThread() {
-          return this.activeThread && this.activeThread.id === this.thread.id
+        return this.activeThread && this.activeThread.id === this.thread.id
       }
     }
   }
@@ -35,27 +37,22 @@
 
 <style scoped>
   .card {
-    box-sizing: border-box;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    color: #333;
+    width: auto;
+    height: auto;
+    min-height: 0;
     cursor: move;
-    font-size: 14px;
-    padding: 10px;
-    position: relative;
-    transition: background-color 140ms ease-in-out, border-color 75ms ease-in-out;
     user-select: none;
+    color: #333;
+    border: 1px solid transparent;
   }
 
   .card:hover {
-    background: #f5f5f5;
-    border-color: #999;
+    background: #f7f7f7;
   }
 
   .card[active] {
-    background: #ebf2f9;
-    border-color: #3572b0;
+    background: #f0f0f2;
+    border-color: #aac;
   }
 
   .card[dragged] {
@@ -88,5 +85,6 @@
 
   .fields {
     margin-top: 10px;
+    text-align: right;
   }
 </style>

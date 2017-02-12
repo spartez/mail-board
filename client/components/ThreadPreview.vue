@@ -1,66 +1,66 @@
 <template>
-  <div v-if="thread">
-    <section class="summary">
-      {{ thread.subject }}
-    </section>
-    <collapsible title="Details">
-      <ul class="property-list">
-        <li class="item">
-          <strong class="item-name">Status:</strong>
-          <span class="item-value"><span class="aui-lozenge aui-lozenge-complete">New</span></span>
-        </li>
-        <li class="item">
-          <strong class="item-name">Created:</strong>
-          <span class="item-value">{{ thread.createdTimestamp | calendarTime }}</span>
-        </li>
-        <li class="item">
-          <strong class="item-name">Updated:</strong>
-          <span class="item-value">{{ thread.updatedTimestamp | calendarTime }}</span>
-        </li>
-        <li class="item">
-          <strong class="item-name">People:</strong>
-          <span class="item-value">
+  <div v-if="thread" class="thread-preview">
+    <div class="mdl-card mdl-shadow--2dp details-card">
+      <div class="mdl-card__supporting-text">
+        <section class="summary">
+          {{ thread.subject }}
+        </section>
+        <ul class="property-list">
+          <li class="item">
+            <strong class="item-name">Status:</strong>
+            <span class="item-value"><span class="aui-lozenge aui-lozenge-complete">New</span></span>
+          </li>
+          <li class="item">
+            <strong class="item-name">Created:</strong>
+            <span class="item-value">{{ thread.createdTimestamp | calendarTime }}</span>
+          </li>
+          <li class="item">
+            <strong class="item-name">Updated:</strong>
+            <span class="item-value">{{ thread.updatedTimestamp | calendarTime }}</span>
+          </li>
+          <li class="item">
+            <strong class="item-name">People:</strong>
+            <span class="item-value">
             <div v-for="participant in thread.participants">
               <img style="vertical-align: middle; margin-right: 5px; height: 20px;" :src="participant.avatar">
               {{ participant.name }}
               <span v-if="participant.address === thread.author.address">(Author)</span>
             </div>
           </span>
-        </li>
-      </ul>
-    </collapsible>
-
-    <collapsible title="Messages">
-      <template v-if="!showAllResponses && thread.messages.length > 2">
-        <thread-message :message="thread.messages[0]"></thread-message>
-        <template>
-          <a class="collapsed-comments" @click="showAllResponses = true">
-            <span class="collapsed-comments-line"></span><span class="collapsed-comments-line"></span>
-            <span class="show-more-comments"
-                  data-collapsed-count="5">{{ thread.messages.length - 2 }} more {{ thread.messages.length === 3 ? 'message' : 'messages' }}</span>
-          </a>
-          <thread-message :message="thread.messages[thread.messages.length - 1]"></thread-message>
-        </template>
-      </template>
-      <template v-else>
-        <thread-message v-for="message in thread.messages" :message="message"></thread-message>
-      </template>
-
-      <div v-show="isResponding">
-        <vue-editor
-          :editor-toolbar="editorToolbar"
-          :use-save-button="false"
-          @editor-updated="saveResponseContent"
-          style="margin-bottom: 10px;"></vue-editor>
-
-        <a class="aui-button aui-button-primary" @click="respondToAll">Respond to all</a>
-        <a class="aui-button aui-button-link" @click="isResponding = false">Cancel</a>
+          </li>
+        </ul>
       </div>
-      <a class="aui-button respond-button" v-if="!isResponding" @click="isResponding = true">
-        <span class="aui-icon aui-icon-small aui-iconfont-comment icon-comment"></span>
-        <span>Respond</span>
-      </a>
-    </collapsible>
+    </div>
+
+    <template v-if="!showAllResponses && thread.messages.length > 2">
+      <thread-message :message="thread.messages[0]"></thread-message>
+      <template>
+        <a class="collapsed-comments" @click="showAllResponses = true">
+          <span class="collapsed-comments-line"></span><span class="collapsed-comments-line"></span>
+          <span class="show-more-comments"
+                data-collapsed-count="5">{{ thread.messages.length - 2 }} more {{ thread.messages.length === 3 ? 'message' : 'messages' }}</span>
+        </a>
+        <thread-message :message="thread.messages[thread.messages.length - 1]"></thread-message>
+      </template>
+    </template>
+    <template v-else>
+      <thread-message v-for="message in thread.messages" :message="message"></thread-message>
+    </template>
+
+    <div v-show="isResponding">
+      <vue-editor
+        :editor-toolbar="editorToolbar"
+        :use-save-button="false"
+        @editor-updated="saveResponseContent"
+        style="margin-bottom: 10px;"></vue-editor>
+
+      <a class="aui-button aui-button-primary" @click="respondToAll">Respond to all</a>
+      <a class="aui-button aui-button-link" @click="isResponding = false">Cancel</a>
+    </div>
+    <a class="aui-button respond-button" v-if="!isResponding" @click="isResponding = true">
+      <span class="aui-icon aui-icon-small aui-iconfont-comment icon-comment"></span>
+      <span>Respond</span>
+    </a>
   </div>
 </template>
 
@@ -134,8 +134,16 @@
   }
 </script>
 <style scoped>
+  .thread-preview {
+    padding: 10px;
+  }
+
   .summary {
-    margin-left: 15px;
+    font-weight: bold;
+  }
+
+  .details-card {
+    width: 100%;
   }
 
   .property-list {
@@ -174,8 +182,10 @@
     border-right: none;
     text-align: center;
     border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
     height: 38px;
     cursor: pointer;
+    margin-top: 15px;
   }
 
   .collapsed-comments:hover {

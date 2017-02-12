@@ -1,20 +1,14 @@
 <template>
   <header id="header" role="banner">
-    <nav class="aui-header aui-dropdown2-trigger-group" role="navigation" data-aui-responsive="true">
-      <div class="aui-header-inner">
-        <div class="aui-header-primary">
-          <h1 id="logo" class="aui-header-logo aui-header-logo-textonly"><a href="./"><span class="aui-header-logo-device">Gmail Board</span></a>
-          </h1>
-        </div>
-
-        <div class="aui-header-secondary">
-          <ul class="aui-nav">
-            <li v-if="isSignedIn"><a href="#" @click.prevent="signOut">Sign out</a></li>
-            <li v-else><a href="#" @click.prevent="signIn">Sign in</a></li>
-          </ul>
-        </div>
+    <nav class="app-header">
+      <div class="app-header-primary">
+        Mail board (meet.js)
       </div>
-    </nav>
+
+      <div class="app-header-secondary">
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-if="isSignedIn" href="#" @click.prevent="signOut">Sign out</button>
+        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-else href="#" @click.prevent="signIn">Sign in</button>
+      </div>
   </header>
 </template>
 
@@ -39,3 +33,26 @@
     }
   }
 </script>
+
+<style scoped>
+  .app-header {
+    line-height: 40px;
+    background: #f1f1f1;
+    border-bottom: 1px solid #ddd;
+    padding: 0 10px;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .app-header-primary {
+    float: left;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .app-header-secondary {
+    float: right;
+  }
+</style>
