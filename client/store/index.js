@@ -47,7 +47,7 @@ const store = new Vuex.Store({
     },
 
     addThreadToColumn(state, {thread, column}) {
-      column.threads.unshift(thread);
+      state.columns[column.id].threads.unshift(thread);
     }
   },
 
