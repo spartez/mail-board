@@ -109,7 +109,9 @@
     flex-grow: 1;
     width: 0;
     margin: 10px 5px;
+    padding-bottom: 10px;
     background: #fcfcfc;
+    min-height: calc(100% - 20px);
   }
 
   .column-header {

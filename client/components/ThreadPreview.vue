@@ -54,13 +54,16 @@
         @editor-updated="saveResponseContent"
         style="margin-bottom: 10px;"></vue-editor>
 
-      <a class="aui-button aui-button-primary" @click="respondToAll">Respond to all</a>
-      <a class="aui-button aui-button-link" @click="isResponding = false">Cancel</a>
+      <button @click="respondToAll" class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary">
+        Respond to all
+      </button>
+      <button @click="isResponding = false" class="mdl-button mdl-js-button ">
+        Cancel
+      </button>
     </div>
-    <a class="aui-button respond-button" v-if="!isResponding" @click="isResponding = true">
-      <span class="aui-icon aui-icon-small aui-iconfont-comment icon-comment"></span>
-      <span>Respond</span>
-    </a>
+    <button v-if="!isResponding" @click="isResponding = true" class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary">
+      Respond
+    </button>
   </div>
 </template>
 

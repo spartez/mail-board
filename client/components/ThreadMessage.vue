@@ -1,12 +1,8 @@
 <template>
   <div class="mdl-card mdl-shadow--2dp thread-message-card">
     <div class="mdl-card__supporting-text">
-    <span class="icon-default aui-icon aui-icon-small thread-message-collapse"
-          :class="{'aui-iconfont-collapsed': isCollapsed, 'aui-iconfont-expanded': !isCollapsed}"
-          @click="isCollapsed = !isCollapsed">
-    </span>
       <img class="thread-message-avatar" :src="message.from.avatar">
-      <a :href="'mailto:' + message.from.address">{{ message.from.name }}</a>
+      <a class="thread-message-author-link" :href="'mailto:' + message.from.address">{{ message.from.name }}</a>
       wrote to
       <img class="thread-message-avatar" :title="person.name" v-for="person in message.to" :src="person.avatar">
       ({{ message.internalDate | calendarTime }})
@@ -69,7 +65,12 @@
 
   .thread-message-card {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .thread-message-author-link {
+    text-decoration: none;
   }
 
   .thread-message-avatar {
@@ -77,9 +78,5 @@
     border-radius: 3px;
     vertical-align: -10%;
     margin-right: 3px;
-  }
-
-  .thread-message-collapse {
-    cursor: pointer;
   }
 </style>

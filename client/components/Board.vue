@@ -81,6 +81,7 @@
   .columns-content {
     display: flex;
     justify-content: space-between;
+    height: 100%;
   }
 
   .preview {
@@ -104,33 +105,5 @@
   .preview-content {
     width: 100%;
     box-sizing: border-box;
-  }
-
-  .quick-filters {
-    padding: 0 10px;
-  }
-
-  .quick-filters-label {
-    color: #707070;
-    font-size: 12px;
-    font-weight: bold;
-    line-height: 1.66666666666667;
-    text-transform: uppercase;
-  }
-
-  .quick-filter {
-    border: 1px solid transparent;
-    -webkit-border-radius: 3px 3px 3px 3px;
-    border-radius: 3px 3px 3px 3px;
-    display: inline-block;
-    line-height: 1;
-    margin: 0 5px 0 0;
-    padding: 7px 10px;
-  }
-
-  .quick-filter:hover {
-    border-color: #ccc;
-    text-decoration: none;
-    cursor: pointer;
   }
 </style>
