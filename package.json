@@ -1,7 +1,7 @@
 {
-  "name": "gmailboard",
+  "name": "mail-board",
   "version": "0.1.0",
-  "description": "Gmail kanban",
+  "description": "Kanban board for GMail",
   "main": "client/index.js",
   "scripts": {
     "test": "testcafe all tests/index.js --app \"npm run dev\" --app-init-delay 10000",
@@ -9,10 +9,13 @@
     "dev": "node build/server.js"
   },
   "author": "Mateusz Zielinski <mateusz.zielinski@spartez.com>",
-  "license": "MIT",
+  "license": "Apache License, Version 2.0",
   "dependencies": {
     "addressparser": "^1.0.1",
     "babel-runtime": "^6.18.0",
+    "gmail-api-parse-message": "^2.0.0",
+    "gravatar": "^1.6.0",
+    "imagesloaded": "^4.1.1",
     "install": "^0.8.4",
     "js-base64": "^2.1.9",
     "mimelib-noiconv": "^0.1.9",
@@ -35,7 +38,7 @@
     "babel-plugin-transform-vue-jsx": "^3.1.0",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-es2015": "^6.14.0",
-    "babel-preset-ssstage-1": "^6.13.0",
+    "babel-preset-stage-1": "^6.13.0",
     "chalk": "^1.1.3",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.23.1",

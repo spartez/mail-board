@@ -1,6 +1,6 @@
 <template>
   <div class="mdl-card mdl-shadow--2dp thread-message-card">
-    <div class="mdl-card__supporting-text">
+    <div class="mdl-card__supporting-text thread-message-content">
       <img class="thread-message-avatar" :src="message.from.avatar">
       <a class="thread-message-author-link" :href="'mailto:' + message.from.address">{{ message.from.name }}</a>
       wrote to
@@ -67,6 +67,11 @@
     width: 100%;
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+
+  .thread-message-content {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .thread-message-author-link {
