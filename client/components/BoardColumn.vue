@@ -113,6 +113,7 @@
     background: #fcfcfc;
     min-height: calc(100% - 20px);
     overflow: visible;
+    border-radius: 2px;
   }
 
   .column-header {
@@ -122,6 +123,7 @@
     color: white;
     text-align: center;
     margin-bottom: 5px;
+    border-radius: 2px 2px 0 0;
   }
 
   .column-fill {
