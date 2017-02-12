@@ -39,14 +39,14 @@
         iframeBody.innerHTML = this.message.content;
 
         iframe.style.height = 0;
-        iframe.style.height = iframeBody.scrollHeight + 'px'
-        iframe.style.width = iframeBody.scrollWidth + 'px'
+        iframe.style.height = iframeBody.scrollHeight + 'px';
+        iframe.style.width = iframeBody.scrollWidth + 'px';
 
         imagesLoaded(iframeBody, () => {
           iframe.style.height = 0;
-          iframe.style.height = iframeBody.scrollHeight + 'px'
-          iframe.style.width = iframeBody.scrollWidth + 'px'
-        })
+          iframe.style.height = iframeBody.scrollHeight + 'px';
+          iframe.style.width = iframeBody.scrollWidth + 'px';
+        });
       }
     },
     filters: {

@@ -48,7 +48,7 @@ export function listThreads(query) {
       'userId': 'me',
       'q': query,
       'pageToken': pageToken
-    })
+    });
   }
 
   return new Promise((resolve) => {
@@ -65,36 +65,36 @@ export function listThreads(query) {
     }
 
     getPageOfThreads(getRequest(), []);
-  })
+  });
 }
 
 export function getThread(threadId, withDetails) {
   const params = {'userId': 'me', 'id': threadId, 'format': withDetails ? 'full' : 'metadata'};
 
   return new Promise(resolve => gapi.client.gmail.users.threads.get(params).execute(resolve)).then(thread => {
-    const subject = _.findWhere(thread.messages[0].payload.headers, {name: 'Subject'}).value
-    const from = _.findWhere(thread.messages[0].payload.headers, {name: 'From'}).value
-    const participants = {}
-    const labels = []
-    const createdTimestamp = parseInt(thread.messages[0].internalDate)
-    const updatedTimestamp = parseInt(thread.messages[thread.messages.length - 1].internalDate)
+    const subject = _.findWhere(thread.messages[0].payload.headers, {name: 'Subject'}).value;
+    const from = _.findWhere(thread.messages[0].payload.headers, {name: 'From'}).value;
+    const participants = {};
+    const labels = [];
+    const createdTimestamp = parseInt(thread.messages[0].internalDate);
+    const updatedTimestamp = parseInt(thread.messages[thread.messages.length - 1].internalDate);
 
     thread.messages.forEach(message => {
       const from = _.findWhere(message.payload.headers, {name: 'From'}).value;
       const to = _.findWhere(message.payload.headers, {name: 'To'}).value;
 
-      parseAddresses(from).forEach(contact => participants[contact.address] = contact)
-      parseAddresses(to).forEach(contact => participants[contact.address] = contact)
+      parseAddresses(from).forEach(contact => participants[contact.address] = contact);
+      parseAddresses(to).forEach(contact => participants[contact.address] = contact);
 
-      labels.push(...message.labelIds)
-    })
+      labels.push(...message.labelIds);
+    });
 
     const parsedMessages = thread.messages.map(message => {
-      const fromString = _.findWhere(message.payload.headers, {name: 'From'}).value
-      const toString = _.findWhere(message.payload.headers, {name: 'To'}).value
-      const from = parseAddresses(fromString)[0]
-      const to = parseAddresses(toString)
-      const parsed = withDetails ? parseMessage(message) : {}
+      const fromString = _.findWhere(message.payload.headers, {name: 'From'}).value;
+      const toString = _.findWhere(message.payload.headers, {name: 'To'}).value;
+      const from = parseAddresses(fromString)[0];
+      const to = parseAddresses(toString);
+      const parsed = withDetails ? parseMessage(message) : {};
 
       return {
         internalDate: message.internalDate,
@@ -115,7 +115,7 @@ export function getThread(threadId, withDetails) {
       updatedTimestamp,
       messages: parsedMessages
     }
-  })
+  });
 }
 
 export function getEmail() {

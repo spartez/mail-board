@@ -22,10 +22,10 @@
   export default {
     methods: {
       signIn() {
-        Gmail.signIn()
+        Gmail.signIn();
       },
       signOut() {
-        Gmail.signOut()
+        Gmail.signOut();
       }
     },
     computed: {

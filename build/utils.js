@@ -1,17 +1,17 @@
-'use strict'
-const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const config = require('./config')
+'use strict';
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const config = require('./config');
 
-const _ = module.exports = {}
+const _ = module.exports = {};
 
 _.cwd = (file) => {
   return path.join(process.cwd(), file || '')
-}
+};
 
 _.cssLoader = config.cssModules ?
   'css-loader?-autoprefixer&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]' :
-  'css-loader?-autoprefixer'
+  'css-loader?-autoprefixer';
 
 _.cssProcessors = [
   {loader: '', test: /\.css$/},
@@ -19,26 +19,26 @@ _.cssProcessors = [
   {loader: 'less-loader?sourceMap', test: /\.less$/},
   {loader: 'stylus-loader?sourceMap', test: /\.styl$/},
   {loader: 'sass-loader?indentedSyntax&sourceMap', test: /\.sass$/},
-]
+];
 
 _.outputPath = config.electron ?
   path.join(__dirname, '../app/dist') :
-  path.join(__dirname, '../dist')
+  path.join(__dirname, '../dist');
 
 _.outputIndexPath = config.electron ?
   path.join(__dirname, '../app/dist/index.html') :
-  path.join(__dirname, '../dist/index.html')
+  path.join(__dirname, '../dist/index.html');
 
 _.target = config.electron ?
   'electron-renderer' :
-  'web'
+  'web';
 
 // https://github.com/egoist/vbuild/blob/master/lib/vue-loaders.js
 _.loadersOptions = () => {
-  const isProd = process.env.NODE_ENV === 'production'
+  const isProd = process.env.NODE_ENV === 'production';
 
   function generateLoader(langs) {
-    langs.unshift('css-loader?sourceMap&-autoprefixer')
+    langs.unshift('css-loader?sourceMap&-autoprefixer');
     if (!isProd) {
       return ['vue-style-loader'].concat(langs).join('!')
     }
@@ -70,4 +70,4 @@ _.loadersOptions = () => {
       }
     }
   }
-}
+};

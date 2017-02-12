@@ -1,14 +1,14 @@
-export const IS_DRAGGING = 'dragState/isDragging'
+export const IS_DRAGGING = 'dragState/isDragging';
 
-export const DRAGGED_THREAD = 'dragState/draggedThread'
-export const DRAGGED_THREAD_CARD_BOX = 'dragState/draggedThreadCard'
-export const DRAG_TARGET_COLUMN = 'dragState/dragTargetColumn'
-export const DRAG_TARGET_RANK = 'dragState/dragTargetPosition'
+export const DRAGGED_THREAD = 'dragState/draggedThread';
+export const DRAGGED_THREAD_CARD_BOX = 'dragState/draggedThreadCard';
+export const DRAG_TARGET_COLUMN = 'dragState/dragTargetColumn';
+export const DRAG_TARGET_RANK = 'dragState/dragTargetPosition';
 
-export const START_DRAGGING = 'dragState/startDragging'
-export const END_DRAGGING = 'dragState/endDragging'
-export const UPDATE_DRAG_GHOST = 'dragState/updateDragGhost'
-export const UPDATE_DRAG_POSITION = 'dragState/updateDragPosition'
+export const START_DRAGGING = 'dragState/startDragging';
+export const END_DRAGGING = 'dragState/endDragging';
+export const UPDATE_DRAG_GHOST = 'dragState/updateDragGhost';
+export const UPDATE_DRAG_POSITION = 'dragState/updateDragPosition';
 
 export default {
   state: {
@@ -62,35 +62,35 @@ export default {
 
   mutations: {
     startDragging(state, {column, rank}) {
-      state.thread = column.threads[rank]
-      state.source.rank = rank
-      state.source.column = column
-      state.target.rank = rank
-      state.target.column = column
+      state.thread = column.threads[rank];
+      state.source.rank = rank;
+      state.source.column = column;
+      state.target.rank = rank;
+      state.target.column = column;
 
       column.threads.splice(rank, 1)
     },
 
     updateDragGhost(state, {top, left, width, height}) {
-      state.box.top = top
-      state.box.left = left
-      state.box.width = width
+      state.box.top = top;
+      state.box.left = left;
+      state.box.width = width;
       state.box.height = height
     },
 
     updateDragPosition(state, {column, rank}) {
-      state.target.rank = rank
+      state.target.rank = rank;
       state.target.column = column
     },
 
     commitDragState(state) {
-      state.target.column.threads.splice(state.target.rank, 0, state.thread)
+      state.target.column.threads.splice(state.target.rank, 0, state.thread);
 
-      localStorage.setItem(`thread-column-${state.thread.id}`, state.target.column.id)
-      localStorage.setItem(`column-order-${state.target.column.id}`, JSON.stringify(state.target.column.threads.map(thread => thread.id)))
+      localStorage.setItem(`thread-column-${state.thread.id}`, state.target.column.id);
+      localStorage.setItem(`column-order-${state.target.column.id}`, JSON.stringify(state.target.column.threads.map(thread => thread.id)));
 
-      state.target.column = null
-      state.target.rank = null
+      state.target.column = null;
+      state.target.rank = null;
 
       state.thread = null
     }

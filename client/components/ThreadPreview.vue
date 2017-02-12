@@ -23,7 +23,7 @@
             <span class="item-value">
             <div v-for="participant in thread.participants">
               <img style="vertical-align: middle; margin-right: 5px; height: 20px;" :src="participant.avatar">
-              {{ participant.name }}
+              {{ participant.name || participant.address }}
               <span v-if="participant.address === thread.author.address">(Author)</span>
             </div>
           </span>
@@ -69,15 +69,15 @@
 </template>
 
 <script>
-  import {VueEditor} from 'vue2-editor'
-  import * as Gmail from '../services/Gmail'
-  import gravatar from 'gravatar';
-  import moment from 'moment';
   import {mapActions, mapGetters} from 'vuex'
+
+  import * as Gmail from '../services/Gmail'
   import * as store from '../store'
 
-  import parse from 'parse-gmail-email';
-  import parseMessage from 'gmail-api-parse-message';
+  import gravatar from 'gravatar';
+  import moment from 'moment';
+
+  import {VueEditor} from 'vue2-editor'
   import ThreadMessage from './ThreadMessage.vue'
 
   export default {
@@ -104,7 +104,7 @@
       }),
 
       gravatar() {
-        return this.thread && gravatar.url(this.thread.author.address)
+        return this.thread && gravatar.url(this.thread.author.address);
       }
     },
 
@@ -125,7 +125,7 @@
       },
 
       respondToAll() {
-        this.sendResponse({thread: this.thread, response: this.responseContent})
+        this.sendResponse({thread: this.thread, response: this.responseContent});
       }
     },
 

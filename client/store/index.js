@@ -3,18 +3,18 @@ import Vuex from 'vuex'
 import * as Gmail from '../services/Gmail'
 import dragState from './dragState'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-export const IS_SIGNED_IN = 'store/isSignedIn'
-export const COLUMNS = 'store/columns'
-export const LOAD_ALL_THREADS = 'store/loadAllThreads'
-export const LOAD_SINGLE_THREAD = 'store/loadSingleThread'
+export const IS_SIGNED_IN = 'store/isSignedIn';
+export const COLUMNS = 'store/columns';
+export const LOAD_ALL_THREADS = 'store/loadAllThreads';
+export const LOAD_SINGLE_THREAD = 'store/loadSingleThread';
 
-export const HAS_ACTIVE_THREAD = 'store/hasActiveThread'
-export const ACTIVE_THREAD = 'store/activeThread'
-export const SET_ACTIVE_THREAD = 'store/activateThread'
+export const HAS_ACTIVE_THREAD = 'store/hasActiveThread';
+export const ACTIVE_THREAD = 'store/activeThread';
+export const SET_ACTIVE_THREAD = 'store/activateThread';
 
-export const SEND_RESPONSE = 'store/sendResponse'
+export const SEND_RESPONSE = 'store/sendResponse';
 
 const store = new Vuex.Store({
   state: {
@@ -39,36 +39,36 @@ const store = new Vuex.Store({
 
   mutations: {
     signedInStatusChanged(state, isSignedIn) {
-      state.isSignedIn = isSignedIn
+      state.isSignedIn = isSignedIn;
     },
 
     setActiveThread(state, thread) {
-      state.activeThread = thread
+      state.activeThread = thread;
     },
 
     addThreadToColumn(state, {thread, column}) {
-      column.threads.unshift(thread)
+      column.threads.unshift(thread);
     }
   },
 
   actions: {
     [LOAD_ALL_THREADS]({dispatch}) {
       Gmail.listThreads('newer_than:4d').then(threads => {
-        threads.forEach(thread => dispatch(LOAD_SINGLE_THREAD, thread.id))
+        threads.forEach(thread => dispatch(LOAD_SINGLE_THREAD, thread.id));
       });
     },
 
     [LOAD_SINGLE_THREAD]({state, commit}, threadId) {
       Gmail.getThread(threadId).then(thread => {
         const column = state.columns[localStorage.getItem(`thread-column-${threadId}`) || 0];
-        commit('addThreadToColumn', {thread, column})
-      })
+        commit('addThreadToColumn', {thread, column});
+      });
     },
 
     [SET_ACTIVE_THREAD]({commit}, thread) {
       return Gmail.getThread(thread.id, true).then(thread => {
-        commit('setActiveThread', thread)
-      })
+        commit('setActiveThread', thread);
+      });
     },
 
     [SEND_RESPONSE]({}, {thread, response}) {
@@ -78,12 +78,12 @@ const store = new Vuex.Store({
 
   modules: {dragState},
   strict: true
-})
+});
 
 Gmail.addSignInStatusChangedHandler(isSignedIn => {
-  store.commit('signedInStatusChanged', isSignedIn)
+  store.commit('signedInStatusChanged', isSignedIn);
   if (isSignedIn) {
-    store.dispatch(LOAD_ALL_THREADS)
+    store.dispatch(LOAD_ALL_THREADS);
   }
 });
 

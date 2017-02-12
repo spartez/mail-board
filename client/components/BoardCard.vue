@@ -1,5 +1,5 @@
 <template>
-  <div class="mdl-card mdl-shadow--2dp card">
+  <div class="mdl-card mdl-shadow--2dp card" @click="setActiveThread(thread)" :active="isActiveThread">
     <div class="mdl-card__supporting-text card-content">
       <section class="summary">
         {{ thread.subject }}
@@ -13,9 +13,25 @@
 
 <script>
   import {mapActions, mapGetters} from 'vuex'
+  import * as store from '../store'
 
   export default {
-    props: ['thread']
+    props: ['thread'],
+
+    methods: {
+      ...mapActions({
+        setActiveThread: store.SET_ACTIVE_THREAD
+      })
+    },
+
+    computed: {
+      ...mapGetters({
+        activeThread: store.ACTIVE_THREAD
+      }),
+      isActiveThread() {
+        return this.activeThread && this.activeThread.id === this.thread.id
+      }
+    }
   }
 </script>
 
@@ -25,6 +41,7 @@
     height: auto;
     min-height: 0;
     cursor: move;
+    user-select: none;
     color: #333;
     border: 1px solid transparent;
   }

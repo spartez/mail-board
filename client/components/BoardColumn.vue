@@ -57,7 +57,7 @@
           }
 
           if (!this.isDragging) {
-            this.startDragging({column: this.column, rank})
+            this.startDragging({column: this.column, rank});
           }
 
           this.updateDragGhost({
@@ -65,21 +65,21 @@
             height: elementBox.height,
             left: event.clientX + elementBox.left - originalEvent.clientX,
             top: event.clientY + elementBox.top - originalEvent.clientY
-          })
-        }
+          });
+        };
 
         const onDrop = () => {
-          document.body.removeEventListener("mousemove", onDragMove)
-          document.body.removeEventListener("mouseup", onDrop)
+          document.body.removeEventListener("mousemove", onDragMove);
+          document.body.removeEventListener("mouseup", onDrop);
 
           if (this.isDragging) {
             this.endDragging();
           }
-        }
+        };
 
-        document.body.addEventListener("mousemove", onDragMove)
-        document.body.addEventListener("mouseup", onDrop)
-        originalEvent.preventDefault()
+        document.body.addEventListener("mousemove", onDragMove);
+        document.body.addEventListener("mouseup", onDrop);
+        originalEvent.preventDefault();
       },
 
       onMouseMoveOverCard(originalEvent, rank) {
@@ -112,6 +112,7 @@
     padding-bottom: 10px;
     background: #fcfcfc;
     min-height: calc(100% - 20px);
+    overflow: visible;
   }
 
   .column-header {

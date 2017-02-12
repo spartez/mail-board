@@ -1,30 +1,30 @@
-'use strict'
-process.env.NODE_ENV = 'production'
+'use strict';
+process.env.NODE_ENV = 'production';
 
-const exec = require('child_process').execSync
-const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const ProgressPlugin = require('webpack/lib/ProgressPlugin')
-const OfflinePlugin = require('offline-plugin')
-const base = require('./webpack.base')
-const pkg = require('../package')
-const _ = require('./utils')
-const config = require('./config')
+const exec = require('child_process').execSync;
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ProgressPlugin = require('webpack/lib/ProgressPlugin');
+const OfflinePlugin = require('offline-plugin');
+const base = require('./webpack.base');
+const pkg = require('../package');
+const _ = require('./utils');
+const config = require('./config');
 
 if (config.electron) {
   // remove dist folder in electron mode
   exec('rm -rf app/assets/')
 } else {
   // remove dist folder in web app mode
-  exec('rm -rf dist/')
+  exec('rm -rf dist/');
   // use source-map in web app mode
   base.devtool = 'source-map'
 }
 
 // a white list to add dependencies to vendor chunk
-base.entry.vendor = config.vendor
+base.entry.vendor = config.vendor;
 // use hash filename to support long-term caching
-base.output.filename = '[name].[chunkhash:8].js'
+base.output.filename = '[name].[chunkhash:8].js';
 // add webpack plugins
 base.plugins.push(
   new ProgressPlugin(),
@@ -55,11 +55,11 @@ base.plugins.push(
       events: true
     }
   })
-)
+);
 
 // extract css in standalone css files
 _.cssProcessors.forEach(processor => {
-  let loaders
+  let loaders;
   if (processor.loader === '') {
     loaders = ['postcss-loader']
   } else {
@@ -72,7 +72,7 @@ _.cssProcessors.forEach(processor => {
       fallbackLoader: 'style-loader'
     })
   })
-})
+});
 
 // minimize webpack output
 base.stats = {
@@ -84,6 +84,6 @@ base.stats = {
   chunkModules: false,
   chunkOrigins: false,
   modules: false
-}
+};
+module.exports = base;
 
-module.exports = base

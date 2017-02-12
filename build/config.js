@@ -1,5 +1,5 @@
-'use strict'
-const pkg = require('../package')
+'use strict';
+const pkg = require('../package');
 
 module.exports = {
   port: 4000,
@@ -37,4 +37,4 @@ module.exports = {
     require('postcss-nested')
   ],
   cssModules: false,
-}
+};
