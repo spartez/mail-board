@@ -1,6 +1,6 @@
 <template>
   <div class="mdl-card mdl-shadow--2dp card" @click="setActiveThread(thread)" :active="isActiveThread">
-    <div class="mdl-card__supporting-text">
+    <div class="mdl-card__supporting-text card-content">
       <section class="summary">
         {{ thread.subject }}
       </section>
@@ -55,13 +55,13 @@
     border-color: #aac;
   }
 
-  .card[dragged] {
-    background: #d5d5d5;
-    border-color: transparent;
-  }
-
   .card[dragged] > * {
     visibility: hidden;
+  }
+
+  .card-content {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .avatar {

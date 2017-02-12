@@ -15,7 +15,7 @@
     </div>
 
     <template>
-      <div class="card-wrapper card-placeholder " v-if="dragTargetColumn === column && dragTargetRank === column.threads.length">
+      <div class="card-wrapper card-placeholder" v-if="dragTargetColumn === column && dragTargetRank === column.threads.length">
         <board-card :thread="draggedThread"></board-card>
       </div>
       <div @mousemove="onMouseMoveOverColumn" class="column-fill"></div>

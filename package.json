@@ -35,7 +35,7 @@
     "babel-plugin-transform-vue-jsx": "^3.1.0",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-es2015": "^6.14.0",
-    "babel-preset-stage-1": "^6.13.0",
+    "babel-preset-ssstage-1": "^6.13.0",
     "chalk": "^1.1.3",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.23.1",

@@ -61,7 +61,8 @@
         Cancel
       </button>
     </div>
-    <button v-if="!isResponding" @click="isResponding = true" class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary">
+    <button v-if="!isResponding" @click="isResponding = true"
+            class="mdl-button mdl-js-button mdl-button--raised mdl-button--primary">
       Respond
     </button>
   </div>
@@ -77,11 +78,10 @@
 
   import parse from 'parse-gmail-email';
   import parseMessage from 'gmail-api-parse-message';
-  import Collapsible from './reusable/Collapsible'
   import ThreadMessage from './ThreadMessage.vue'
 
   export default {
-    components: {Collapsible, ThreadMessage, VueEditor},
+    components: {ThreadMessage, VueEditor},
 
     data: () => ({
       message: null,

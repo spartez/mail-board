@@ -2,13 +2,7 @@
   <div class="board">
     <div class="board-content">
       <div class="columns">
-        <!--<div class="columns-header">-->
-          <!--<div v-for="column in columns" class="column-header">{{ column.name }}</div>-->
-        <!--</div>-->
-
-        <div class="columns-content">
-          <board-column v-for="column in columns" :column="column"></board-column>
-        </div>
+        <board-column v-for="column in columns" :column="column"></board-column>
       </div>
 
       <div class="preview">
@@ -18,8 +12,7 @@
       </div>
     </div>
 
-    <board-card v-if="draggedThread" :thread="draggedThread" :style="cardStyle"
-                style="position: absolute; pointer-events: none;"></board-card>
+    <board-card v-if="draggedThread" :thread="draggedThread" :style="draggedCardStyle" class="dragged-thread-card"></board-card>
   </div>
 </template>
 
@@ -44,7 +37,7 @@
         draggedThreadCard: dragStateStore.DRAGGED_THREAD_CARD_BOX
       }),
 
-      cardStyle() {
+      draggedCardStyle() {
         return {
           width: `${this.draggedThreadCard.width}px`,
           height: `${this.draggedThreadCard.height}px`,
@@ -76,12 +69,8 @@
     overflow: auto;
     flex-grow: 1;
     height: 100%;
-  }
-
-  .columns-content {
     display: flex;
     justify-content: space-between;
-    height: 100%;
   }
 
   .preview {
@@ -105,5 +94,10 @@
   .preview-content {
     width: 100%;
     box-sizing: border-box;
+  }
+
+  .dragged-thread-card {
+    position: absolute;
+    pointer-events: none;
   }
 </style>

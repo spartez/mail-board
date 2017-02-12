@@ -1,14 +1,16 @@
 <template>
-  <header id="header" role="banner">
-    <nav class="app-header">
-      <div class="app-header-primary">
-        Mail board (meet.js)
-      </div>
+  <header class="app-header">
+    <div class="app-header-primary">
+      Mail board (meet.js)
+    </div>
 
-      <div class="app-header-secondary">
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-if="isSignedIn" href="#" @click.prevent="signOut">Sign out</button>
-        <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-else href="#" @click.prevent="signIn">Sign in</button>
-      </div>
+    <div class="app-header-secondary">
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-if="isSignedIn" href="#" @click.prevent="signOut">
+        Sign out
+      </button>
+      <button class="mdl-button mdl-js-button mdl-js-ripple-effect" v-else href="#" @click.prevent="signIn">Sign in
+      </button>
+    </div>
   </header>
 </template>
 

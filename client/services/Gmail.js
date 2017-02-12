@@ -42,10 +42,6 @@ export function signOut() {
   return gapi.auth2.getAuthInstance().signOut();
 }
 
-export function getLabels() {
-  return gapi.client.gmail.users.labels.list({'userId': 'me'}).then(response => response.result.labels)
-}
-
 export function listThreads(query) {
   function getRequest(pageToken) {
     return gapi.client.gmail.users.threads.list({
@@ -127,26 +123,5 @@ export function getEmail() {
 }
 
 export function sendMessage(threadId, subject, to, content) {
-  return getEmail().then(from => {
-    return new Promise(resolve => {
-      const encodedResponse = Base64.encodeURI(
-        `Content-Type: text/html; charset=UTF-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-Subject: ${subject}
-From: ${from}
-Reply-To: ${from}
-To: ${to}
-
-${content}`);
-
-      gapi.client.gmail.users.messages.send({
-        userId: 'me',
-        resource: {
-          raw: encodedResponse,
-          threadId
-        },
-      }).execute(resolve)
-    });
-  })
+  alert("Implement me in client/services/Gmail.js");
 }
